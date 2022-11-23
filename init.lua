@@ -1,5 +1,3 @@
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end)
 return {
   colorscheme = "catppuccin-macchiato", plugins = {
@@ -13,4 +11,20 @@ return {
       },
     },
   },
+  mappings = {
+    n = {
+      ["<leader>b"] = { "<cmd>%bd|e#|bd#<cr>", desc = "Close all buffer except current"},
+    },
+  },
+  polish = function() 
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true } 
+    map("n", "<C-J>", ":m .+1<cr>==", opts)
+    map("n", "<C-K>", ":m .-2<cr>==", opts)
+    vim.filetype.add {
+       extension = {
+         config = "xml",
+       }
+     }
+  end,
 }
