@@ -1,8 +1,8 @@
 vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end)
 return {
-    colorscheme = "catppuccin-macchiato",
+    colorscheme = "catppuccin-frappe",
     plugins = {
-        {"catppuccin/nvim", name = "catppuccin"}, {
+        {"catppuccin/nvim", name = "catppuccin", priority = 1000}, {
             "folke/flash.nvim",
             event = "VeryLazy",
             ---@type Flash.Config
