@@ -1,3 +1,9 @@
+vim.opt.shell = vim.fn.executable "pwsh" and "pwsh" or "powershell"
+vim.opt.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
 vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end)
 return {
     colorscheme = "catppuccin-frappe",
@@ -52,14 +58,10 @@ return {
     --         })
     --     end
     -- },
-    mappings = {
-        n = {
-            ["<leader>b"] = {
-                "<cmd>%bd|e#|bd#<cr>",
-                desc = "Close all buffer except current"
-            }
-        }
-    },
+    -- mappings = {
+    --     n = {
+    --     }
+    -- },
     polish = function()
         local map = vim.api.nvim_set_keymap
         local opts = {noremap = true, silent = true}
@@ -67,6 +69,7 @@ return {
         -- map("n", "<C-K>", ":m .-2<cr>==", opts)
         map("n", "<C-d>", "<C-d>zz", opts)
         map("n", "<C-u>", "<C-u>zz", opts)
+        map("n", "<leader>fg", ":Telescope git_status<cr>", opts)
         vim.filetype.add {extension = {config = "xml"}}
     end
 }
